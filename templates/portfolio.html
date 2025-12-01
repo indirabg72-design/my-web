@@ -781,12 +781,11 @@
             <p class="text-xl md:text-2xl text-cyan-400 mb-2 hero-animated-item" id="hello-text">Hello, It's Me</p>
             <h2 class="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-4 hero-animated-item" id="name-text">Lathashree</h2>
             <!-- New H3 for animated text -->
-            <h3 class="text-2xl md:text-3xl font-bold text-gray-200 mb-4 hero-animated-item" id="aspiring-text">And I'm an <span id="animated-text" class="text-cyan-400 font-semibold"></span></h3>
+            <h3 class="text-2xl md:text-3xl font-bold text-gray-200 mb-4 hero-animated-item" id="aspiring-text">And I'm a <span id="animated-text" class="text-cyan-400 font-semibold"></span></h3>
             <p class="text-lg md:text-xl text-gray-300 mb-6 hero-animated-item" id="description-text">
-                MCA graduate specializing in Data Science, Machine Learning, and Full-Stack Web Development. 
-                <br>
-                Passionate about applying AI and analytics to solve real-world challenges while building scalable 
-                and user-friendly web applications. Strong interest in NLP, Deep Learning, and data-driven problem solving.
+               MCA graduate specializing in Machine Learning, Artificial Intelligence, and Deep Learning, with hands-on experience in NLP, Computer Vision, and real-time AI applications.
+                <br> Passionate about applying ML and AI techniques to solve real-world problems, with deep interest in NLP, automation, and building scalable intelligent systems.
+               
             </p>
             <!-- Social Media Icons - Updated for GitHub, LinkedIn, Instagram, and Email -->
             <div class="flex justify-center md:justify-start space-x-4 mb-8 hero-animated-item" id="social-icons">
@@ -837,16 +836,19 @@
             <div class="text-center md:text-left max-w-xl">
                 <h3 class="text-3xl font-bold text-white mb-4">Why Choose Me?</h3>
                 <p class="text-lg text-gray-300 mb-6">
-                    I am a passionate and dedicated Computer Science professional with a strong foundation in Data Science, 
-                    Machine Learning, and Full-Stack Web Development. Having completed an internship in Data Science, 
-                    I gained hands-on experience in data preprocessing, model building, and visualization, which further 
-                    strengthened my ability to solve real-world challenges through AI.
-                    <br><br>
-                     
-                    I thrive on continuous learning and enjoy exploring emerging technologies in Deep Learning, NLP, and 
-                    data-driven applications. From designing intelligent ML models to building robust web platforms, 
-                    my goal is to create scalable and impactful solutions. With a focus on clean, effective, and well-documented 
-                    code, I am committed to transforming ideas into meaningful innovations. Let’s create something amazing together!
+                    
+    I am a motivated Computer Science professional with a solid background in Machine Learning, 
+    Artificial Intelligence, and Data Science. Through my internship experience, I worked on 
+    real-time AI projects involving model development, preprocessing, and analysis, which helped 
+    me build practical solutions using ML and CV techniques.
+    <br><br>
+    
+    I enjoy learning new technologies and exploring areas like Deep Learning, NLP, and intelligent 
+    automation. Whether it’s developing smart ML models or creating smooth, user-friendly web 
+    applications, I aim to build scalable and efficient systems. With a focus on clarity, clean 
+    code, and impactful development, I am driven to turn ideas into meaningful AI-powered solutions.
+
+
                 </p>
                 <a href="{{ url_for('static', filename='assets/Lathashree.pdf') }}" target="_blank">
                     <button class="bg-[#1f2937] text-cyan-400 font-bold py-3 px-6 rounded-lg shadow-[0_0_10px_rgba(0,255,255,0.3)] transition-all duration-300 ease-in-out transform hover:bg-cyan-400 hover:text-[#1f2937] hover:scale-105 hover:shadow-[0_0_20px_rgba(0,255,255,0.7)]"
@@ -1379,7 +1381,7 @@
                 </div>
                 <p class="text-xl font-semibold text-gray-200 mb-4">LPoint, Mangalore</p>
                 <p class="text-gray-300 leading-relaxed">
-                    During my internship at LPoint, I had the opportunity to work on AI and data-driven applications, where I applied concepts of machine learning, deep learning, and natural language processing to solve practical problems. My role involved handling real-world datasets, building models, and deploying them into interactive systems using Flask. The experience allowed me to explore the integration of computer vision, speech processing, and chatbot development, giving me exposure to both the technical and applied aspects of artificial intelligence. Beyond technical work, I also developed problem-solving, research, and collaboration skills while working in a team-oriented environment.
+                    During my internship at LPoint, I worked as a Machine Learning Intern, where I focused on applying ML techniques to real-world datasets and building practical AI solutions. My work involved data preprocessing, model training, evaluation, and deploying ML models into functional applications using Flask. I also worked on projects involving computer vision, speech-based processing, and chatbot features, which helped me understand how ML integrates into real-time systems. Along with technical growth, I strengthened my problem-solving, research, and teamwork skills while contributing to data-driven projects.
                 </p>
                 <h4 class="text-lg font-bold text-white mt-4 mb-2">Skills Gained</h4>
                 <div class="mb-4">
@@ -1512,11 +1514,57 @@
         const pauseVisibleDuration = 5 * 1000; // 5 seconds (reduced from 30 for better experience)
         const pauseHiddenDuration = 1 * 1000; // 1 second pause between cycles
 
-        // Typewriter variables
-        let charIndex = 0;
-        const textToAnimate = "Aspiring Data Science";
-        let typewriterTimeoutId;
-        let typewriterRunning = false;
+      // === Rotating Typewriter ===
+let titles = [
+    "Aspiring Machine Learning Engineer",
+    "AI Enthusiast"
+];
+
+let currentTitleIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+let typewriterTimeoutId;
+
+function rotateTypewriter() {
+    const animatedTextElement = document.getElementById('animated-text');
+    if (!animatedTextElement) return;
+
+    let currentTitle = titles[currentTitleIndex];
+
+    if (!isDeleting) {
+        // Typing
+        animatedTextElement.textContent = currentTitle.substring(0, charIndex + 1);
+        charIndex++;
+
+        if (charIndex === currentTitle.length) {
+            // Pause when full word typed
+            setTimeout(() => { isDeleting = true; rotateTypewriter(); }, 1200);
+            return;
+        }
+
+    } else {
+        // Deleting
+        animatedTextElement.textContent = currentTitle.substring(0, charIndex - 1);
+        charIndex--;
+
+        if (charIndex === 0) {
+            // Move to next title
+            isDeleting = false;
+            currentTitleIndex = (currentTitleIndex + 1) % titles.length;
+        }
+    }
+
+    typewriterTimeoutId = setTimeout(rotateTypewriter, isDeleting ? 50 : 90);
+}
+
+function startTypewriter() {
+    rotateTypewriter();
+}
+
+function stopTypewriter() {
+    clearTimeout(typewriterTimeoutId);
+}
+
 
         // Track animation states
         let skillsAnimated = false;
@@ -1533,39 +1581,9 @@
             profileImageContainer = document.getElementById('profile-image-container');
         }
 
-        // Function to start the typewriter animation
-        function startTypewriter() {
-            const animatedTextElement = document.getElementById('animated-text');
-            if (!animatedTextElement || typewriterRunning) return;
+        
 
-            typewriterRunning = true;
-            charIndex = 0;
-            animatedTextElement.textContent = '';
-            animatedTextElement.classList.remove('blinking-cursor');
-
-            function typeChar() {
-                if (charIndex < textToAnimate.length) {
-                    animatedTextElement.textContent += textToAnimate.charAt(charIndex);
-                    charIndex++;
-                    typewriterTimeoutId = setTimeout(typeChar, 100);
-                } else {
-                    animatedTextElement.classList.add('blinking-cursor');
-                    typewriterRunning = false;
-                }
-            }
-            typeChar();
-        }
-
-        // Function to stop and reset the typewriter animation
-        function stopTypewriter() {
-            clearTimeout(typewriterTimeoutId);
-            typewriterRunning = false;
-            const animatedTextElement = document.getElementById('animated-text');
-            if (animatedTextElement) {
-                animatedTextElement.classList.remove('blinking-cursor');
-                animatedTextElement.textContent = '';
-            }
-        }
+      
 
         // Function to reset elements to their initial hidden state
         function resetElementsToInitialState() {
@@ -2130,6 +2148,7 @@ function addMessage(text, sender) {
 </body>
 
 </html>
+
 
 
 
