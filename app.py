@@ -127,8 +127,9 @@ def chat():
             temperature=0.6
         )
 
-        print("Calling model: gemini-2.5-flash")
-        print("User message:", user_message)
+        print("===== CHAT REQUEST =====")
+        print("Requested model:", "gemini-2.5-flash")
+        print("Message:", user_message)
 
         response = client.models.generate_content(
             model="gemini-2.5-flash",  # ✅ updated model name
@@ -143,7 +144,9 @@ def chat():
         return jsonify({"response": response.text})
 
     except Exception as e:
-        print(f"❌ Chat error: {e}")
+        
+        print("FULL ERROR:")
+        print(repr(e))
         return jsonify({"response": f"Sorry, the chatbot encountered an error: {str(e)}"})
 
 @app.route('/check_key')
