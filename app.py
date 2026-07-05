@@ -114,6 +114,7 @@ def chat():
     try:
         data = request.get_json()
         user_message = data.get('message', '').strip()
+          
         if not user_message:
             return jsonify({"response": "Please type a message to get a response."})
 
@@ -127,6 +128,12 @@ def chat():
             contents=[user_message],
             config=config
         )
+        
+        return jsonify({
+            "response": response.text,
+            "model": "gemini-2.5-flash",
+            "status": "running"
+        })
 
         return jsonify({"response": response.text})
 
