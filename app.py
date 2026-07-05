@@ -110,6 +110,7 @@ def home():
     return render_template("portfolio.html")
 
 @app.route('/chat', methods=['POST'])
+print("🔥 ENTERED /chat ROUTE", flush=True)
 def chat():
     if not client:
         return jsonify({"response": "Chatbot is temporarily offline. Failed to initialize Gemini client."}), 200
@@ -127,9 +128,9 @@ def chat():
             temperature=0.6
         )
 
-        print("===== CHAT REQUEST =====")
-        print("Requested model:", "gemini-2.5-flash")
-        print("Message:", user_message)
+        print("===== CHAT REQUEST =====", flush=True)
+        print("Requested model:", "gemini-2.5-flash", flush=True)
+        print("Message:", user_message, flush=True)
 
         response = client.models.generate_content(
             model="gemini-2.5-flash",  # ✅ updated model name
