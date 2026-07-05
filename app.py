@@ -4,6 +4,9 @@ from flask_cors import CORS
 from google import genai
 from google.genai import types
 
+
+print("🔥 THIS IS LIVE DEPLOYED APP - VERSION 2.5 FILE")
+
 # ----------------------------------------------------------------------
 # 1. FLASK SETUP
 # ----------------------------------------------------------------------
@@ -112,6 +115,7 @@ def chat():
         return jsonify({"response": "Chatbot is temporarily offline. Failed to initialize Gemini client."}), 200
 
     try:
+        
         data = request.get_json()
         user_message = data.get('message', '').strip()
           
