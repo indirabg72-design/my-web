@@ -110,8 +110,9 @@ def home():
     return render_template("portfolio.html")
 
 @app.route('/chat', methods=['POST'])
-    print("🔥 ENTERED /chat ROUTE", flush=True)
+    
 def chat():
+    print("🔥 ENTERED /chat ROUTE", flush=True)
     if not client:
         return jsonify({"response": "Chatbot is temporarily offline. Failed to initialize Gemini client."}), 200
 
