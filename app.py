@@ -127,6 +127,9 @@ def chat():
             temperature=0.6
         )
 
+        print("Calling model: gemini-2.5-flash")
+        print("User message:", user_message)
+
         response = client.models.generate_content(
             model="gemini-2.5-flash",  # ✅ updated model name
             contents=[user_message],
