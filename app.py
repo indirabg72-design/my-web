@@ -135,6 +135,8 @@ def chat():
             "status": "running"
         })
 
+        
+
         return jsonify({"response": response.text})
 
     except Exception as e:
