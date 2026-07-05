@@ -124,7 +124,7 @@ def chat():
         )
 
         response = client.models.generate_content(
-            model="gemini-1.5-flash",  # ✅ updated model name
+            model="gemini-2.5-flash",  # ✅ updated model name
             contents=[user_message],
             config=config
         )
